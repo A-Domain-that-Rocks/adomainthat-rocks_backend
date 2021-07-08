@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
 	try {
 		console.log("Request: " + JSON.stringify(req.query));
 
-    let package = req.query["package"];
+    	let package = req.query["package"];
 
 		const result = await packageService.queryPackages(package);
 

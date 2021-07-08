@@ -5,6 +5,8 @@ const DB = new arangojs.Database({ // Database connection
     url: dbConfig.url
 });
 
+const { createSimpleErrorPromise, createErrorPromise } = require('../utils/error');
+
 // Database selection
 DB.useDatabase(dbConfig.database);
 
@@ -14,21 +16,41 @@ DB.useBasicAuth(dbConfig.username, dbConfig.password);
 // Collection to manage
 var collection = DB.collection('packages');
 
-exports.queryPackages = (package) => {
+exports.queryList = (page=1, results=10, sortField='nr', sortOrder='asc', filters=[]) => {
 	let query = 'FOR doc IN @@collection';
-	let params = {'@collection' : collection.name};
+	console.log(collection.name);
+	let params = {
+		'@collection' : collection.name,
+		offset: (page-1) * results,
+		count: results,
+		sortField,
+		sortOrder: sortOrder.startsWith('desc') ? 'desc' : 'asc',
+	};
 	if (filters.length) {
-		query += " FILTER REGEX_TEST(doc.@filterName" + 1 + ", @filterValue" + 1 + ", true)";
-        params['filterName'+1] = package[i].name;
-        params['filterValue'+1] = package[i].value;
-    }
-	// query += " FILTER REGEX_TEST(doc.@filterField, @filterValue, true)";
+		for (let i = 0; i < filters.length; i++) {
+			if (i === 0) {
+				query += " FILTER";
+			} else {
+				query += " &&";
+			}
+			query += " REGEX_TEST(doc.@filterName" + i + ", @filterValue" + i + ", true)";
+			params['filterName'+i] = filters[i].name;
+			params['filterValue'+i] = filters[i].value;
+		}
+		// query += " FILTER REGEX_TEST(doc.@filterField, @filterValue, true)";
+	}
+	if (sortField) {
+		query += " SORT doc.@sortField @sortOrder";
+	}
+	if (results) {
+		query += " LIMIT @offset, @count";
+	}
 	query += " RETURN doc";
 
 	console.log('AQL', query);
 	console.log('Params', params);
 
-	return DB.query(query, params).catch(e => {
+	return DB.query(query, params, {count:true, options:{fullCount:true} }).catch(e => {
 		return createSimpleErrorPromise(e.response.body);
 	});
 };

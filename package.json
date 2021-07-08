@@ -12,7 +12,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
-    "arangojs": "^7.5.0",
+    "arangojs": "^6.11.1",
     "express": "^4.17.1",
     "nodemon": "^2.0.9"
   }

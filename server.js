@@ -1,15 +1,19 @@
-const express = require('express');
-const dotenv = require('dotenv')
-var cors = require('cors');
+const express = require("express");
+const dotenv = require("dotenv");
+var cors = require("cors");
 
-const myEnv = dotenv.config({path: "./config/.env"});
+
+const myEnv = dotenv.config({ path: "./.env" });
 const app = express();
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
- 
+// Routes
+const packageRoute = require('./routes/package_route');
+
+// Route Middleware
+app.use(express.json());
+app.use('/api/package', packageRoute);
+
 app.listen(process.env.PORT, () =>
-  console.log(`Example app listening on port ${process.env.PORT}!`),
+	console.log(`API up and running, listening on port ${process.env.PORT}!`)
 );

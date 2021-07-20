@@ -1,8 +1,8 @@
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-module.exports = {
+let dbConfig = {
 	'url': process.env.DB_HOST,
 	'database': process.env.DB_NAME,
 
@@ -10,3 +10,5 @@ module.exports = {
 	'username': process.env.DB_USER,
 	'password': process.env.DB_PASS
 };
+
+export default dbConfig;

@@ -21,8 +21,8 @@ let my_schema = new GraphQLSchema({
                 },
                 type: Author,
                 resolve: async (root, args) => {
-                    console.log(args);
-                    console.log(args.name);
+                    //console.log(args);
+                    //console.log(args.name);
                     let result = await getAuthorByName(args.name)
                     //console.log(result);
                     return result

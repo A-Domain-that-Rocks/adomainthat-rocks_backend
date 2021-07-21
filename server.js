@@ -8,15 +8,10 @@ import my_schema from './graphql/my_schema.js'
 dotenv.config();
 
 const app = express();
-//console.log(process.env)
 app.use(cors());
-
-// Routes
-// import myRoute from "./routes/my_route.js";
 
 // Route Middleware
 app.use(express.json());
-// app.use('/my_api/my_route', myRoute);
 app.use('/graphql', graphqlHTTP({
     schema: my_schema,
     graphiql: true

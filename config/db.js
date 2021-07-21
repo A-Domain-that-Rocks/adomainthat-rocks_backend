@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { Database } from "arangojs";
 
 dotenv.config();
 
@@ -11,4 +12,13 @@ let dbConfig = {
 	'password': process.env.DB_PASS
 };
 
-export default dbConfig;
+const db = new Database({
+    url: dbConfig.url,
+    databaseName: dbConfig.database,
+    auth: {
+        username: dbConfig.username,
+        password: dbConfig.password
+    },
+});
+
+export { db };

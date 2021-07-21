@@ -1,5 +1,4 @@
-import { GraphQLObjectType,
-         GraphQLString } from 'graphql';
+import { GraphQLObjectType, GraphQLString } from 'graphql';
 
 let Year = new GraphQLObjectType({
     name: 'Year',
@@ -10,6 +9,6 @@ let Year = new GraphQLObjectType({
         number: { type: GraphQLString },
         graph_name: { type: GraphQLString }
     })
-})
+});
 
 export default Year;

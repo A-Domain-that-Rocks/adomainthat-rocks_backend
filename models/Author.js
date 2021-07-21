@@ -1,6 +1,4 @@
-import { GraphQLObjectType,
-         GraphQLString,
-         GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
 
 let Author = new GraphQLObjectType({
     name: 'Author',
@@ -16,11 +14,11 @@ let Author = new GraphQLObjectType({
         kind: { type: GraphQLString },
         other_orcid: { type: GraphQLString },
         isnot: { type: GraphQLString },
-        //url: { type: GraphQLList(GraphQLObjectType) },
+        //url: { type: GraphQLList(GraphQLString) },
         other_names: { type: GraphQLList(GraphQLString) },
         affiliation: { type: GraphQLList(GraphQLString) },
-        //note: { type: GraphQLList(GraphQLObjectType) }
+        //note: { type: GraphQLList(GraphQLString) }
     })
-})
+});
 
 export default Author;

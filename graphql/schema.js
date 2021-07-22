@@ -71,7 +71,8 @@ const typeDefs = `
     type Query {
         year: [Year]
         authors(name: String!): [Author]
-        authorGraph(author_id: String!, minDepth: String = "1", maxDepth: String = "2"): SlimGraph!
+        nodesID(name: String!): [SlimNode]
+        nodeGraph(node_id: String!, minDepth: String = "1", maxDepth: String = "2"): SlimGraph!
     }
 `
 

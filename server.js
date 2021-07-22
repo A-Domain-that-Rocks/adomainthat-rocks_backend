@@ -17,7 +17,6 @@ await server.start();
 server.applyMiddleware({ app, path: '/graphql' });
 app.get('/', (req, res) => res.end('Welcome to the API'));
 app.get('/playground', expressPlaygroundMiddleware.default({ endpoint: '/graphql' }));
-console.log("PRova2")
 app.listen(process.env.PORT, () =>
 	console.log(`API up and running, listening on port ${process.env.PORT}!`)
 );

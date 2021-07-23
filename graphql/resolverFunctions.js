@@ -1,30 +1,15 @@
 import { aql } from "arangojs";
 import { db } from '../config/db.js';
 
-const getAuthorsByName = async (name) => {
-    try {
-        let queryVar = aql`
-            FOR auth IN author
-                FILTER auth.name != null AND auth.name != "" AND CONTAINS(auth.name, ${name})
-                RETURN auth
-        `
-        return ( await db.query(queryVar)).all();
-    } catch (e) { console.error("Error:\n" + e) };
-};
-
-const getAllYears = async () => {
-    try {
-        let queryVar = aql`FOR y IN year RETURN y`
-        return ( await db.query(queryVar)).all();
-    } catch (e) { console.error("Error:\n" + e) };
-};
-
 const getNodesIDByName = async (name) => {
     try {
         let queryVar = aql`
-        TODO ${name}
+        FOR n IN all_nodes
+            FILTER n.name != null AND n.name != "" AND CONTAINS(LOWER(n.name), LOWER(${name}))
+            SORT n.appearances DESC, n.name
+            RETURN { _id: n.id, graph_name: n.name, the_type: n.type, appearances: ((n.appearances != null AND IS_NUMBER(n.appearances)) ? n.appearances : 1) }
         `
-        return (await (await db.query(queryVar)).all())[0]
+        return await (await db.query(queryVar)).all()
     } catch (e) { console.error("Error:\n" + e) };
 };
 
@@ -58,4 +43,4 @@ const getNodeGraph = async (aID, minD, maxD) => {
     } catch (e) { console.error("Error:\n" + e) };
 };
 
-export { getAllYears, getAuthorsByName, getNodesIDByName, getNodeGraph }
+export { getNodesIDByName, getNodeGraph }

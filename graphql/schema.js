@@ -16,6 +16,13 @@ const typeDefs = `
         type: String
     }
 
+    type SuggestedNode {
+        _id: String!
+        graph_name: String
+        the_type: String
+        appearances: Int
+    }
+
     type SlimNode {
         _id: String!
         graph_name: String!
@@ -69,9 +76,7 @@ const typeDefs = `
     }
 
     type Query {
-        year: [Year]
-        authors(name: String!): [Author]
-        nodesID(name: String!): [SlimNode]
+        nodesID(name: String!): [SuggestedNode]
         nodeGraph(node_id: String!, minDepth: String = "1", maxDepth: String = "2"): SlimGraph!
     }
 `

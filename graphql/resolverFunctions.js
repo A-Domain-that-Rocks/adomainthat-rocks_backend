@@ -6,7 +6,7 @@ const getNodesIDByName = async (name) => {
         let queryVar = aql`
         FOR n IN all_nodes
             FILTER n.name != null AND n.name != "" AND CONTAINS(LOWER(n.name), LOWER(${name}))
-            SORT n.appearances DESC, n.name
+            LIMIT 10
             RETURN { _id: n.id, graph_name: n.name, the_type: n.type, appearances: ((n.appearances != null AND IS_NUMBER(n.appearances)) ? n.appearances : 1) }
         `
         return await (await db.query(queryVar)).all()

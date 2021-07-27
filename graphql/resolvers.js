@@ -1,4 +1,4 @@
-import { getNodesIDByName2, getNodesIDByName3, getNodesIDByName5, getNodeGraph, getNodesIDByToken } from './resolverFunctions.js';
+import { getNodesIDByName2, getNodesIDByName3, getNodesIDByName5, getNodeGraph } from './resolverFunctions.js';
 
 const resolvers = {
     Query: {

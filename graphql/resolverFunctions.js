@@ -75,4 +75,4 @@ const getNodeGraph = async (aID, minD, maxD) => {
     } catch (e) { console.error("Error:\n" + e) };
 };
 
-export { getNodesIDByName2, getNodesIDByName3, getNodesIDByName5, getNodeGraph, getNodesIDByToken }
+export { getNodesIDByName2, getNodesIDByName3, getNodesIDByName5, getNodeGraph }

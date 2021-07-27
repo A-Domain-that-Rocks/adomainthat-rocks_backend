@@ -20,7 +20,6 @@ const typeDefs = `
         _id: String!
         graph_name: String
         the_type: String
-        appearances: Int
     }
 
     type SlimNode {
@@ -76,7 +75,9 @@ const typeDefs = `
     }
 
     type Query {
-        nodesID(name: String!): [SuggestedNode]
+        nodesID2(name: String!): [SuggestedNode]
+        nodesID3(name: String!): [SuggestedNode]
+        nodesID5(name: String!): [SuggestedNode]
         nodeGraph(node_id: String!, minDepth: String = "1", maxDepth: String = "2"): SlimGraph!
     }
 `

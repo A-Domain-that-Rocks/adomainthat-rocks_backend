@@ -25,6 +25,7 @@ const typeDefs = `
     type SlimNode {
         _id: String!
         graph_name: String!
+        community: String
     }
 
     type SlimEdge {

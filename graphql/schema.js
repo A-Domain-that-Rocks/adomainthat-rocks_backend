@@ -34,10 +34,15 @@ const typeDefs = `
         label: String
     }
 
+    type Community {
+        number: String!
+    }
+
     type SlimGraph {
         startNode: SlimNode!
         vertices: [SlimNode!]
         edges: [SlimEdge]
+        communities: [Community]
     }
 
     type Author {

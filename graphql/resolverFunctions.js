@@ -67,9 +67,14 @@ const getNodeGraph = async (aID, minD, maxD) => {
                 FOR el IN graph_data
                     RETURN el.edges
             ))
+            LET allCommunities = UNIQUE(FLATTEN(
+                FOR el IN allVertices
+                    RETURN { number: el.community }
+            ))
             RETURN { startNode: startN[0],
                      vertices: allVertices,
-                     edges: allEdges }
+                     edges: allEdges,
+                     communities: allCommunities }
         `
         return (await (await db.query(queryVar)).all())[0]
     } catch (e) { console.error("Error:\n" + e) };
